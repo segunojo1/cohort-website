@@ -140,7 +140,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <Image src="/assets/hero-notifs/111.png" alt="" width={362}
+      <Image src="/assets/hero-notifs/5.png" alt="" width={362}
                 height={64} />
     </div>
   );
