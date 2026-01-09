@@ -4,7 +4,10 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const Story = () => {
   const container = useRef(null);
@@ -250,16 +253,14 @@ const Story = () => {
           socially.
         </span>
 
-        <span className="reveal-text">
+        <span className="reveal-text flex">
           <span className="relative flex">
-            <span className="z-10 relative people-text text-white">
-              students
-            </span>
+            <span className="z-10 relative people-text ">students</span>
             <Image
               className="red absolute left-0 transition-all duration-300 -z-10"
-              src="/assets/yellow2.svg"
+              src="/assets/yellow1.svg"
               alt="yellow"
-              width={183}
+              width={153}
               height={39}
             />
           </span>
@@ -268,82 +269,98 @@ const Story = () => {
           think that’s backwards.
         </span>
 
-        <span className="reveal-text items-center">
-          Discovering dinosaurs.
-          <span className="flex items-start relative min-w-[170px] ">
-            <Image
-              className="dino brightness-75 transition-all duration-300 -left-10 absolute z-[999]"
-              src="/assets/dino.svg"
-              alt="dino"
-              width={86}
-              height={86}
-            />
-            <span className="asking">Asking </span>
-          </span>
-          “why?” a hundred times. Feeling like a genius.
-          <span className="relative w-[64px]">
-            <Image
-              src="/assets/lightbulb.svg"
-              className="absolute bulb top-0 -left-4"
-              alt="light"
-              width={64}
-              height={64}
-            />
-          </span>
+        <span className="reveal-text flex">
+          That’s why we built
+          <span className="underline text-[#0078FF]">cohort.</span>
+          <Image
+            className="red transition-all duration-300 -z-10"
+            src="/assets/cohort2.svg"
+            alt="ch"
+            width={55}
+            height={55}
+          />
         </span>
 
-        <span className="reveal-text">
-          Then school made it mechanical: copy notes, memorize, forget, repeat
-          repeat repeat repeat repeatrepeatrepeat.
-        </span>
-
-        <span className="reveal-text ">
-          College made it clear: traditional classes don&apos;t cut it. Real
-          understanding comes from deep reading, late-night sessions, and study
-          that actually makes{" "}
-          <span className="sense flex border-b-[#00FF0D] border-b-[5px] ">
-            sense
-          </span>
-          .
-        </span>
-
-        <span className="reveal-text">
-          So we built Clark — your personal study sidekick. Upload PDFs, chat
-          with AI, make quizzes & flashcards, collaborate with friends, and
-          actually enjoy
+        <span className="reveal-text flex">
+          Cohort is a
           <span className="relative">
             <Image
-              src="/assets/star.svg"
-              className="absolute star animate-spin transition-all duration-300 bottom-2 left-0 mx-auto right-0"
-              alt="star"
-              width={41}
-              height={41}
+              src="/assets/underline.svg"
+              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              alt="ch"
+              width={232}
+              height={0}
             />
-            learning
+            second brain
           </span>
-          again.
-        </span>
-        <span className="reveal-text">
-          Because learning isn&apos;t about sitting in class — it&apos;s about
-          mastering knowledge.
+          and social operating system for student life. It learns who you are,
+          your classes, schedule, interests, and vibe, and acts on your behalf.
         </span>
 
-        <span className="reveal-text items-center ">
-          And Clark makes it effortless.
+        <span className="reveal-text">
+          Instead of scrolling or searching, you just ask: backwards
+        </span>
+
+        <span className="reveal-text flex">
+          cohort knows you—your classes, schedule, interests, and goals. And cohort knows
           <span className="relative">
             <Image
-              src="/assets/wind.svg"
-              className="wind -right-7"
-              alt="wind"
-              width={55}
-              height={55}
+              src="/assets/underline.svg"
+              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              alt="ch"
+              width={232}
+              height={0}
             />
+            everyone
+          </span>
+          else too. So instead of you doing the work, Lena does it for you.
+        </span>
+
+        <span className="reveal-text flex">
+            Finding the <span className="relative">
+            <Image
+              src="/assets/underline.svg"
+              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              alt="ch"
+              width={88}
+              height={4}
+            />
+            right
+          </span> people. handling emails and scheduling. surfacing what actually <span className="relative">
+            <Image
+              className="red absolute right-0 bottom-0 transition-all duration-300 -z-10"
+              src="/assets/yellow1.svg"
+              alt="yellow"
+              width={131}
+              height={39}
+            />
+            matters.
+          </span> making introductions with context. helping you keep up without 
+          <span className="relative flex items-center">
+            <Image
+              className="red absolute right-0  left-0  transition-all duration-300 -z-10"
+              src="/assets/strikethrough.svg"
+              alt="line"
+              width={218}
+              height={49}
+            />
+            burning out.
           </span>
         </span>
-        <span className="reveal-text text-[#5AB864]">
-          Built by students, for students.{" "}
-        </span>
-        <span className="reveal-text"> — Sheriff, Seyi & Segun 💙</span>
+
+        <span className="reveal-text flex">You don’t have to 
+            <span className="relative flex items-center">
+            <Image
+              className="red absolute right-0  left-0  transition-all duration-300 -z-10"
+              src="/assets/strikethrough.svg"
+              alt="line"
+              width={139}
+              height={49}
+            />
+            manage
+          </span>
+             student life anymore. You just live it.</span>
+
       </div>
     </div>
   );
