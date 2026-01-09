@@ -8,15 +8,15 @@ const notificationPositions = [
   // Left side notifications
   { top: '10%', left: '0px', delay: 0.2 },
   { top: '25%', left: '30px', delay: 0.4 },
-  { top: '45%', left: '8%', delay: 0.6 },
-  { top: '65%', left: '12%', delay: 0.8 },
-  { top: '80%', left: '8%', delay: 1.0 },
+  { top: '45%', left: '0px', delay: 0.6 },
+  { top: '65%', left: '0px', delay: 0.8 },
+  { top: '80%', left: '0px', delay: 1.0 },
   // Right side notifications
-  { top: '15%', right: '10%', delay: 0.3 },
-  { top: '30%', right: '5%', delay: 0.5 },
-  { top: '50%', right: '8%', delay: 0.7 },
-  { top: '70%', right: '12%', delay: 0.9 },
-  { top: '85%', right: '8%', delay: 1.1 },
+  { top: '15%', right: '0px', delay: 0.3 },
+  { top: '30%', right: '0px', delay: 0.5 },
+  { top: '50%', right: '40px', delay: 0.7 },
+  { top: '70%', right: '20px', delay: 0.9 },
+  { top: '85%', right: '45px', delay: 1.1 },
 ];
 
 const container = {
@@ -62,15 +62,15 @@ const Hero = () => {
       
       <div className="mt-[68px] relative w-full max-w-[1200px] mx-auto">
         {/* Left Side Notifications */}
-        <div className="absolute left-0 top-0 h-full w-1/2 flex flex-col justify-between py-20">
+        <div className="absolute left-0 top-0 h-full w-1/3 flex flex-col justify-between py-20">
           {isVisible && notificationPositions.slice(0, 5).map((pos, index) => (
             <motion.div
               key={`left-${index}`}
               className="relative"
               style={{ 
                 alignSelf: 'flex-end',
-                width: '80%',
-                maxWidth: '300px',
+                width: '100%',
+                maxWidth: '362px',
                 marginRight: `${pos.left}`
               }}
               initial={{ opacity: 0, x: -50 }}
@@ -109,16 +109,16 @@ const Hero = () => {
           />
 
         {/* Right Side Notifications */}
-        <div className="absolute right-0 top-0 h-full w-1/2 flex flex-col justify-between py-20">
+        <div className="absolute right-10 top-0 h-full w-1/3 flex flex-col justify-between py-20">
           {isVisible && notificationPositions.slice(5).map((pos, index) => (
             <motion.div
               key={`right-${index}`}
               className="relative"
               style={{ 
-                alignSelf: 'flex-end',
+                alignSelf: 'flex-start',
                 width: '80%',
                 maxWidth: '300px',
-                marginRight: `${index * 10}%`
+                marginLeft: `${pos.right}`
               }}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -139,6 +139,9 @@ const Hero = () => {
           ))}
         </div>
       </div>
+
+      <Image src="/assets/hero-notifs/111.png" alt="" width={362}
+                height={64} />
     </div>
   );
 };
