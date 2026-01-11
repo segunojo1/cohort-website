@@ -208,7 +208,7 @@ const Story = () => {
           <span className="relative flex">
             <span className="z-10 relative people-text">people</span>
             <Image
-              className="yellow absolute -left-3 transition-all duration-300 -z-10"
+              className="yellow absolute -left-3 transition-all duration-300 z-0"
               src="/assets/yellow2.svg"
               alt="yellow"
               width={153}
@@ -230,7 +230,7 @@ const Story = () => {
               deadlines,
             </span>
             <Image
-              className="red absolute left-0 transition-all duration-300 -z-10"
+              className="red absolute left-0 transition-all duration-300 z-0"
               src="/assets/red.svg"
               alt="red"
               width={183}
@@ -252,7 +252,7 @@ const Story = () => {
           <span className="relative flex">
             <span className="z-10 relative people-text ">students</span>
             <Image
-              className="yellow1 absolute left-0 transition-all duration-300 -z-10"
+              className="yellow1 absolute left-0 transition-all duration-300 z-0"
               src="/assets/yellow1.svg"
               alt="yellow"
               width={153}
@@ -329,7 +329,7 @@ const Story = () => {
           That’s why we built
           <span className="cohort text-[#0078FF]">cohort.</span>
           <Image
-            className="cohortt transition-all duration-300 -z-10"
+            className="cohortt transition-all duration-300 "
             src="/assets/cohort2.svg"
             alt="ch"
             width={55}
@@ -342,7 +342,7 @@ const Story = () => {
           <span className="relative">
             <Image
               src="/assets/underline.svg"
-              className="absolute underlinee -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              className="absolute underlinee -bottom-1 left-0 right-0 transition-all duration-300 "
               alt="ch"
               width={232}
               height={0}
@@ -362,7 +362,7 @@ const Story = () => {
           <span className="relative">
             <Image
               src="/assets/underline.svg"
-              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              className="absolute -bottom-1 left-0 right-0 transition-all duration-300"
               alt="ch"
               width={232}
               height={0}
@@ -376,7 +376,7 @@ const Story = () => {
             Finding the <span className="relative">
             <Image
               src="/assets/underline.svg"
-              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              className="absolute -bottom-1 left-0 right-0 transition-all duration-300"
               alt="ch"
               width={88}
               height={4}
@@ -384,7 +384,7 @@ const Story = () => {
             right
           </span> people. handling emails and scheduling. surfacing what actually <span className="relative">
             <Image
-              className="red absolute right-0 bottom-0 transition-all duration-300 -z-10"
+              className="red absolute right-0 bottom-0 transition-all duration-300"
               src="/assets/yellow1.svg"
               alt="yellow"
               width={131}
@@ -394,7 +394,7 @@ const Story = () => {
           </span> making introductions with context. helping you keep up without 
           <span className="relative flex items-center">
             <Image
-              className="red absolute right-0  left-0  transition-all duration-300 -z-10"
+              className="red absolute right-0  left-0  transition-all duration-300"
               src="/assets/strikethrough.svg"
               alt="line"
               width={218}
@@ -407,7 +407,7 @@ const Story = () => {
         <span className="reveal-text flex">You don’t have to 
             <span className="relative flex items-center">
             <Image
-              className="red absolute right-0  left-0  transition-all duration-300 -z-10"
+              className="red absolute right-0  left-0  transition-all duration-300"
               src="/assets/strikethrough.svg"
               alt="line"
               width={139}
