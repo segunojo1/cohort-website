@@ -122,8 +122,13 @@
   }
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'PP Neue Montreal', sans-serif;                                             
+  font-family: 'PP Neue Montreal', sans-serif;    
+  scroll-behavior: smooth;                                         
 }
 
 .reveal-text{

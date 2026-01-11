@@ -62,7 +62,7 @@ const Hero = () => {
 
       <div className="relative w-full max-w-[1200px] h-[65vh] flex items-center justify-center">
         {/* Left Side Notifications */}
-        <div className="absolute left-8 top-0 pt-[1%] z-[10] h-full max-h-[472px] w-1/3 flex flex-col  justify-center gap-[27px] ">
+        <div className="absolute left-8 top-0 pt-[1%] z-[10] h-full max-h-[472px] w-1/3 flex-col md:flex hidden justify-center gap-[27px] ">
           {isVisible &&
             notificationPositions.slice(0, 5).map((pos, index) => (
               <motion.div
@@ -110,7 +110,7 @@ const Hero = () => {
         </div>
 
         {/* Right Side Notifications */}
-        <div className="absolute right-14 top-0 pt-[1%] h-full w-1/3 max-h-[472px] flex flex-col justify-center gap-[27px]">
+        <div className="absolute right-14 top-0 pt-[1%] h-full w-1/3 max-h-[472px] md:flex hidden flex-col justify-center gap-[27px]">
           {isVisible &&
             notificationPositions.slice(5).map((pos, index) => (
               <motion.div

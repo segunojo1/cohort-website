@@ -194,10 +194,10 @@ const Story = () => {
     { scope: container }
   );
   return (
-    <div ref={container} className="max-w-[1074px] mt-[50px] mx-auto">
+    <div ref={container} className="max-w-[1074px] my-[50px] mx-auto px-[15px]">
       <div
         id="txts"
-        className="text-[45px]/[100%] font-medium flex flex-col text-[#000] text-start leading-[-4%]"
+        className="text-3xl md:text-4xl lg:text-5xl font-medium flex flex-col text-[#000] text-start leading-tight tracking-tight"
       >
         <span className="reveal-text">
           They say university is the most social time of your life.
@@ -265,7 +265,7 @@ const Story = () => {
         </span>
 
 
-          <div className="relative w-full h-[356px] my-12 overflow-hidden">
+          <div className="relative w-full md:h-[356px] h-[200px] my-12 overflow-hidden">
             <motion.div 
               className="relative w-full h-full"
               initial="hidden"
@@ -282,16 +282,16 @@ const Story = () => {
             >
               {[
                 // [id, left/right position, top position, delay multiplier, z-index]
-                [1, 'left-10', 'top-[0%]', 0.2, 9],
+                [1, 'md:left-10 ', 'top-[0%]', 0.2, 9],
                 [2, 'left-0', 'top-[30%]', 0.7, 8],
-                [3, 'left-10', 'top-[60%]', 0.4, 7],
+                [3, 'md:left-10', 'top-[60%]', 0.4, 7],
                 [4, 'left-2/4 -translate-x-1/2', 'top-[5%]', 0.5, 6],
                 [5, 'left-2/4 -translate-x-1/2', 'top-[35%]', 0.1, 5],
                 [6, 'left-2/4 -translate-x-1/2', 'top-[60%]', 0.8, 4],
-                [7, 'right-6', 'top-[0%]', 0.3, 3],
-                [8, 'right-14', 'top-[25%]', 0.6, 2],
-                [9, 'right-10', 'top-[50%]', 0.9, 1],
-                [10, 'right-15', 'top-[75%]', 1.1, 1],
+                [7, 'md:right-6 right-0', 'top-[0%]', 0.3, 3],
+                [8, 'md:right-14 right-6', 'top-[25%]', 0.6, 2],
+                [9, 'md:right-10 right-0', 'top-[50%]', 0.9, 1],
+                [10, 'md:right-15 right-4', 'top-[75%]', 1.1, 1],
               ].map(([id, position, top, delayMultiplier, zIndex]) => (
                 <motion.div
                   key={`notification-${id}`}
