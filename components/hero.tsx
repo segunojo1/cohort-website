@@ -13,10 +13,10 @@ const notificationPositions = [
   { top: "80%", left: "0px", delay: 1.0 },
   // Right side notifications
   { top: "15%", right: "0px", delay: 0.3 },
-  { top: "30%", right: "0px", delay: 0.5 },
-  { top: "50%", right: "40px", delay: 0.7 },
-  { top: "70%", right: "20px", delay: 0.9 },
-  { top: "85%", right: "45px", delay: 1.1 },
+  { top: "25%", right: "0px", delay: 0.5 },
+  { top: "35%", right: "40px", delay: 0.7 },
+  { top: "55%", right: "20px", delay: 0.9 },
+  { top: "0%", right: "45px", delay: 1.1 },
 ];
 
 const container = {
@@ -60,9 +60,9 @@ const Hero = () => {
         The social layer for student life.
       </h1>
 
-      <div className="relative w-full max-w-[1200px] h-[65vh] flex items-center  justify-center">
+      <div className="relative w-full max-w-[1200px] h-[65vh] flex items-center justify-center">
         {/* Left Side Notifications */}
-        <div className="absolute left-0 top-0 bottom-0 my-auto z-[10] h-full max-h-[472px] w-1/3 flex flex-col  justify-between ">
+        <div className="absolute left-8 top-0 pt-[1%] z-[10] h-full max-h-[472px] w-1/3 flex flex-col  justify-center gap-[27px] ">
           {isVisible &&
             notificationPositions.slice(0, 5).map((pos, index) => (
               <motion.div
@@ -71,7 +71,7 @@ const Hero = () => {
                 style={{
                   alignSelf: "flex-end",
                   width: "100%",
-                  maxWidth: "362px",
+                  maxWidth: "322px",
                   marginRight: `${pos.left}`,
                 }}
                 initial={{ opacity: 0, x: -50 }}
@@ -86,7 +86,7 @@ const Hero = () => {
                   src={`/assets/hero-notifs/${index + 1}.png`}
                   alt={`notification-${index + 1}`}
                   width={362}
-                  height={64}
+                  height={44}
                   className="w-full h-auto"
                 />
               </motion.div>
@@ -110,7 +110,7 @@ const Hero = () => {
         </div>
 
         {/* Right Side Notifications */}
-        <div className="absolute right-10 top-0 bottom-0 my-auto h-full w-1/3 max-h-[472px] flex flex-col justify-between">
+        <div className="absolute right-14 top-0 pt-[1%] h-full w-1/3 max-h-[472px] flex flex-col justify-center gap-[27px]">
           {isVisible &&
             notificationPositions.slice(5).map((pos, index) => (
               <motion.div
@@ -134,7 +134,7 @@ const Hero = () => {
                   src={`/assets/hero-notifs/${index + 6}.png`}
                   alt={`notification-${index + 6}`}
                   width={362}
-                  height={64}
+                  height={44}
                   className="w-full h-auto"
                 />
               </motion.div>

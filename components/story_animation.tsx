@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -19,40 +20,60 @@ const Story = () => {
       //   paragraphs.forEach((para) => {
       const split = new SplitText("#txts", { type: "words" });
 
-      gsap.fromTo(
-        ".yellow",
-        { opacity: 0, maxWidth: 0, rotate: 0, scale: 0.7, y: 30 },
-        {
-          opacity: 1,
-          maxWidth: 153,
-          scale: 1.1,
-          rotate: 360,
-          y: -30,
-          ease: "elastic.out(1, 0.6)",
-          duration: 0.5,
-          scrollTrigger: {
-            trigger: ".diamond-icon",
-            start: "top 70%",
-            end: "bottom 73%",
-            toggleActions: "play none none reverse",
-            markers: false,
-          },
-        }
-      );
+      gsap.set(".yellow", {
+        clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)",
+      });
+
+      gsap.fromTo(".yellow", {
+        y: -30, opacity: 0 
+      }, {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+        duration: 2,
+        opacity: 1,
+        ease: "none",
+        y: -30,
+        scrollTrigger: {
+          trigger: ".yellow",
+          start: "top 80%",
+          end: "top 50%",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
+
+      gsap.set(".yellow1", {
+        clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)",
+      });
+
+      gsap.fromTo(".yellow1", {
+        y: 0, opacity: 0 
+      }, {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+        duration: 2,
+        opacity: 1,
+        ease: "none",
+        y: 0,
+        scrollTrigger: {
+          trigger: ".yellow1",
+          start: "top 80%",
+          end: "top 50%",
+          toggleActions: "play none none none",
+          markers: false,
+        },
+      });
 
       gsap.fromTo(
         ".red",
-        { opacity: 0, maxWidth: 0, rotate: 0, scale: 0.7, y: 30 },
+        { opacity: 0, maxWidth: 0, y: 0, clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" },
         {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
           opacity: 1,
           maxWidth: 153,
-          scale: 1.1,
-          rotate: 360,
           y: 0,
-          ease: "elastic.out(1, 0.6)",
-          duration: 0.5,
+          ease: "none",
+          duration: 1,
           scrollTrigger: {
-            trigger: ".diamond-icon",
+            trigger: ".red",
             start: "top 70%",
             end: "bottom 73%",
             toggleActions: "play none none reverse",
@@ -61,11 +82,11 @@ const Story = () => {
         }
       );
 
-      gsap.to(".asking", {
-        x: 36,
+      gsap.from(".cohortt", {
+        opacity: 0,
         ease: "power1.inOut",
         scrollTrigger: {
-          trigger: ".asking",
+          trigger: ".cohortt",
           start: "top 70%",
           end: "bottom 73%",
           toggleActions: "play none none reverse",
@@ -109,97 +130,71 @@ const Story = () => {
         }
       );
 
-      gsap.from(split.words, {
-        opacity: 0.15,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power2.out",
+      gsap.fromTo(
+        ".deadline-text",
+        { color: "#6e6e6e" },
+        {
+          color: "#ffffff",
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".deadline-text",
+            start: "top 70%",
+            end: "bottom 73%",
+            toggleActions: "play none none reverse",
+            markers: false,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".underlinee",
+        {
+          clipPath: "polygon(0 0, 0% 0, 0% 100%, 0% 100%)",
+          opacity: 0.5,
+          width: 0,
+          y: -30
+        },
+        {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+          opacity: 1,
+          y: 0,
+          width: 243,
+          duration: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".underlinee",
+            start: "top 80%",
+            end: "top 50%",
+            toggleActions: "play none none none",
+            markers: false,
+          },
+        }
+      );
+
+      const textTl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: "top 65%",
-          end: "bottom 60%",
-          scrub: true,
+          start: "top 70%",
+          end: "bottom 30%",
+          scrub: 0.5,
           markers: false,
         },
       });
 
-      gsap.fromTo(
-        ".sense",
-        {
-          borderBottomWidth: "0%",
-          opacity: 0.15,
-          y: 30,
-        },
-        {
-          borderBottomWidth: "100%",
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".sense",
-            start: "top 65%",
-            end: "bottom 60%",
-            scrub: true,
-            markers: false,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".star",
-        {
-          opacity: 0.15,
-          scale: 0.7,
-        },
-        {
-          borderBottomWidth: "100%",
-          opacity: 1,
-          y: 0,
-          animation: "spin 1s linear infinite",
-          scale: 1.1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".star",
-            start: "top 65%",
-            end: "bottom 60%",
-            scrub: true,
-            markers: false,
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".wind",
-        {
-          opacity: 0.15,
-          scale: 0.7,
-          y: 30,
-        },
-        {
-          borderBottomWidth: "100%",
-          opacity: 1,
-          rotate: 360,
-          scale: 1.2,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".wind",
-            start: "top 65%",
-            end: "bottom 60%",
-            scrub: true,
-            markers: false,
-          },
-        }
-      );
+      textTl.from(split.words, {
+        opacity: 0.15,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.05,
+        ease: "sine.out"
+      }, "<0.2");
+      
       //   });
     },
     { scope: container }
   );
   return (
-    <div ref={container} className="max-w-[1074px] mx-auto">
+    <div ref={container} className="max-w-[1074px] mt-[50px] mx-auto">
       <div
         id="txts"
         className="text-[45px]/[100%] font-medium flex flex-col text-[#000] text-start leading-[-4%]"
@@ -231,7 +226,7 @@ const Story = () => {
         <span className="reveal-text flex ">
           Classes,
           <span className="relative flex">
-            <span className="z-10 relative people-text text-white">
+            <span className="z-10 relative deadline-text ">
               deadlines,
             </span>
             <Image
@@ -257,7 +252,7 @@ const Story = () => {
           <span className="relative flex">
             <span className="z-10 relative people-text ">students</span>
             <Image
-              className="red absolute left-0 transition-all duration-300 -z-10"
+              className="yellow1 absolute left-0 transition-all duration-300 -z-10"
               src="/assets/yellow1.svg"
               alt="yellow"
               width={153}
@@ -269,11 +264,72 @@ const Story = () => {
           think that’s backwards.
         </span>
 
+
+          <div className="relative w-full h-[356px] my-12 overflow-hidden">
+            <motion.div 
+              className="relative w-full h-full"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
+            >
+              {[
+                // [id, left/right position, top position, delay multiplier, z-index]
+                [1, 'left-10', 'top-[0%]', 0.2, 9],
+                [2, 'left-0', 'top-[30%]', 0.7, 8],
+                [3, 'left-10', 'top-[60%]', 0.4, 7],
+                [4, 'left-2/4 -translate-x-1/2', 'top-[5%]', 0.5, 6],
+                [5, 'left-2/4 -translate-x-1/2', 'top-[35%]', 0.1, 5],
+                [6, 'left-2/4 -translate-x-1/2', 'top-[60%]', 0.8, 4],
+                [7, 'right-6', 'top-[0%]', 0.3, 3],
+                [8, 'right-14', 'top-[25%]', 0.6, 2],
+                [9, 'right-10', 'top-[50%]', 0.9, 1],
+                [10, 'right-15', 'top-[75%]', 1.1, 1],
+              ].map(([id, position, top, delayMultiplier, zIndex]) => (
+                <motion.div
+                  key={`notification-${id}`}
+                  className={`absolute w-1/3 max-w-[300px]  overflow-hidden ${position} ${top}`}
+                  style={{ zIndex }}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 20 },
+                    visible: { 
+                      opacity: 1, 
+                      scale: 1,
+                      y: 0,
+                      transition: {
+                        delay: 0.1 + (delayMultiplier as number) * 0.8,
+                        type: 'spring',
+                        stiffness: 300 + Math.random() * 100,
+                        damping: 20 + Math.random() * 5,
+                      }
+                    }
+                  }}
+                >
+                  <Image
+                    src={`/assets/story-notifs/${id}.png`}
+                    alt={`notification-${id}`}
+                    width={300}
+                    height={80}
+                    className="w-full h-auto"
+                    priority
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
         <span className="reveal-text flex">
           That’s why we built
-          <span className="underline text-[#0078FF]">cohort.</span>
+          <span className="cohort text-[#0078FF]">cohort.</span>
           <Image
-            className="red transition-all duration-300 -z-10"
+            className="cohortt transition-all duration-300 -z-10"
             src="/assets/cohort2.svg"
             alt="ch"
             width={55}
@@ -286,7 +342,7 @@ const Story = () => {
           <span className="relative">
             <Image
               src="/assets/underline.svg"
-              className="absolute -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
+              className="absolute underlinee -bottom-1 left-0 right-0 transition-all duration-300 -z-10"
               alt="ch"
               width={232}
               height={0}
