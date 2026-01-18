@@ -1,4 +1,4 @@
-## wELCOME TO COHORT - SOCIAL LAYER FOR STUDENTS
+## WELCOME TO COHORT - SOCIAL LAYER FOR STUDENTS
 - Cohort is a platform that helps students make friends, find roommates, and feel connected through shared interests and events.
 - No platform is designed specifically for friendships in University.
 - Our AI (Lena) introduces friends and roommates based on interests, vibe, and intent.
