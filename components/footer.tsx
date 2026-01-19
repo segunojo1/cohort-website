@@ -1,37 +1,50 @@
-
+"use client"
 
 import React from "react";
 import { Button } from "./ui/button";
 import Logo from "./logo";
+import { toast } from "sonner";
 
 const Footer = () => {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const email = formData.get('email') as string;
+  
+  const submitButton = e.currentTarget.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton?.textContent;
+  if (submitButton) {
+    submitButton.textContent = 'Subscribing...';
+    submitButton.setAttribute('disabled', 'true');
+  }
+
+  try {
+    const response = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
     
-    try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        alert(data.message || 'Thank you for subscribing!');
-        e.currentTarget.reset();
-      } else {
-        alert(data.error || 'Failed to subscribe. Please try again.');
-      }
-    } catch (error) {
-      console.error('Subscription error:', error);
-      alert('An error occurred. Please try again later.');
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to subscribe');
     }
-  };
+
+    toast(data.message || 'Thank you for subscribing, you will get contacted when we launch!');
+  } catch (error) {
+    console.error('Subscription error:', error);
+    toast('An error occurred. Please try again later.');
+  } finally {
+    if (submitButton) {
+      submitButton.textContent = originalButtonText || 'Get Early Access';
+      submitButton.removeAttribute('disabled');
+    }
+  }
+};
 
   return (
     <footer id="access" className="w-full">
@@ -41,7 +54,7 @@ const Footer = () => {
         </h2>
 
         <form 
-          onSubmit={handleSubmit} 
+          onSubmit={handleSubmit}
           className="flex flex-col md:flex-row gap-[22px] mt-8 w-full max-w-[600px]"
         >
           <input
@@ -49,7 +62,7 @@ const Footer = () => {
             type="email"
             placeholder="email"
             required
-            className="flex-1 px-6 py-3 rounded-full backdrop-blur-md bg-white/20 border-2 border-white shadow-lg shadow-black/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent text-white placeholder-white/70 w-full"
+            className="flex-1 px-6 py-3 rounded-full backdrop-blur-md bg-white/20 border-2 border-white shadow-lg shadow-black/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent text-black placeholder-black/70 w-full"
             style={{
               background:
                 "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))",
@@ -59,7 +72,7 @@ const Footer = () => {
           />
           <button
             type="submit"
-            className="py-3 px-8 rounded-full font-medium text-white transition-all duration-300 border-2 border-white hover:shadow-lg hover:bg-white/10 whitespace-nowrap"
+            className="py-3 px-8 rounded-full cursor-pointer font-medium text-black transition-all duration-300 border-2 border-white hover:shadow-lg hover:bg-white/10 whitespace-nowrap"
             style={{
               background:
                 "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))",

@@ -1,9 +1,8 @@
+// c:\Users\hp\Documents\cohort-website\app\api\subscribe\route.ts
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
-
-// Path to the JSON file that will store the emails
-const SUBSCRIBERS_FILE = path.join(process.cwd(), 'data', 'subscribers.json');
+import { db } from '@/database/drizzle';
+import { subscribersTable } from '@/database/schema';
+import { eq } from 'drizzle-orm';
 
 export async function POST(request: Request) {
   try {
@@ -17,39 +16,43 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create data directory if it doesn't exist
-    await fs.mkdir(path.dirname(SUBSCRIBERS_FILE), { recursive: true });
-
-    // Read existing subscribers or create new array if file doesn't exist
-    let subscribers: string[] = [];
     try {
-      const fileContents = await fs.readFile(SUBSCRIBERS_FILE, 'utf-8');
-      subscribers = JSON.parse(fileContents);
-    } catch (error) {
-      // File doesn't exist yet, which is fine
-    }
+      // Check if email already exists
+      const existingSubscriber = await db
+        .select()
+        .from(subscribersTable)
+        .where(eq(subscribersTable.email, email))
+        .execute();
 
-    // Check if email already exists
-    if (subscribers.includes(email)) {
+      if (existingSubscriber.length > 0) {
+        return NextResponse.json(
+          { message: 'This email is already subscribed' },
+          { status: 200 }
+        );
+      }
+
+      // Insert new subscriber
+      await db
+        .insert(subscribersTable)
+        .values({ email })
+        .execute();
+
       return NextResponse.json(
-        { message: 'This email is already subscribed' },
-        { status: 200 }
+        { message: 'Thank you for subscribing!' },
+        { status: 201 }
+      );
+    } catch (error) {
+      console.error('Database error:', error);
+      return NextResponse.json(
+        { error: 'Failed to process subscription' },
+        { status: 500 }
       );
     }
-
-    // Add new email and save
-    subscribers.push(email);
-    await fs.writeFile(SUBSCRIBERS_FILE, JSON.stringify(subscribers, null, 2));
-
-    return NextResponse.json(
-      { message: 'Thank you for subscribing!' },
-      { status: 201 }
-    );
   } catch (error) {
-    console.error('Subscription error:', error);
+    console.error('Request error:', error);
     return NextResponse.json(
-      { error: 'Failed to process subscription' },
-      { status: 500 }
+      { error: 'Invalid request' },
+      { status: 400 }
     );
   }
 }
