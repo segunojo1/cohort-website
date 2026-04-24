@@ -96,7 +96,7 @@ const Hero = () => {
         {/* Main Phone Image */}
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
-            src="/assets/iphone_mockup.png"
+            src="/assets/new_hero.png"
             alt="phone"
             width={650}
             height={884}
