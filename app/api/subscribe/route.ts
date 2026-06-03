@@ -4,7 +4,7 @@ import { db } from '@/database/drizzle';
 import { subscribersTable } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 
-const ALLOWED_ORIGIN = 'https://trycohort.xyz';
+const ALLOWED_ORIGIN = 'https://www.trycohort.xyz';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
