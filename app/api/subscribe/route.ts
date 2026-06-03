@@ -4,13 +4,39 @@ import { db } from '@/database/drizzle';
 import { subscribersTable } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 
+const ALLOWED_ORIGIN = 'https://trycohort.xyz';
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Max-Age': '86400',
+};
+
+function jsonWithCors(body: unknown, init?: ResponseInit) {
+  return NextResponse.json(body, {
+    ...init,
+    headers: {
+      ...corsHeaders,
+      ...(init?.headers ?? {}),
+    },
+  });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
 
     // Basic email validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json(
+      return jsonWithCors(
         { error: 'Please enter a valid email address' },
         { status: 400 }
       );
@@ -25,7 +51,7 @@ export async function POST(request: Request) {
         .execute();
 
       if (existingSubscriber.length > 0) {
-        return NextResponse.json(
+        return jsonWithCors(
           { message: 'This email is already subscribed' },
           { status: 200 }
         );
@@ -37,20 +63,20 @@ export async function POST(request: Request) {
         .values({ email })
         .execute();
 
-      return NextResponse.json(
+      return jsonWithCors(
         { message: 'Thank you for subscribing!' },
         { status: 201 }
       );
     } catch (error) {
       console.error('Database error:', error);
-      return NextResponse.json(
+      return jsonWithCors(
         { error: 'Failed to process subscription' },
         { status: 500 }
       );
     }
   } catch (error) {
     console.error('Request error:', error);
-    return NextResponse.json(
+    return jsonWithCors(
       { error: 'Invalid request' },
       { status: 400 }
     );
